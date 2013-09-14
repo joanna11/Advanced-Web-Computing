@@ -1,59 +1,35 @@
-$(document).ready(function(){
+$(function() {
 
-    $('#searchForm').submit(function(){
-        webSearch();
-        return false;
-		
+    var app = {};
+    var url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json';
+    $.ajax({
+        url: url,
+        data: {
+            apiKey: 'hcrurhsttexasrgfm2y6yahm'
+        },
+        dataType: 'jsonp',
+        success: showBoxOffice
     });
-	
+    function getTemplate(template_id, context) {
+        var template, $template, markup;
+        template = $('#' + template_id);
+        $template = Handlebars.compile(template.html());
+        markup = $template(context);
+        return markup;
 
-    function webSearch(){
-		
-		
-        var inp = $('#s').val();
-        var apiURL = 'http://api.rottentomatoes.com/api/public/v1.0/movies.json';
-        $.ajax({
-            type: "GET",
-            data: {
-                q: inp,
-                apiKey: 'yqmxyvyjaff6v6ufx9j4n3ru',
-            },
-            url: apiURL,
-            dataType:"jsonp",
-            success: showMovies
+    }
+    function showBoxOffice(response) {
+        app.movies = response.movies;
+        var movie, template, $template, markup;
+        for (var i = 0; i < app.movies.length; i++) {
+                movie = app.movies[i];
+                movie._index = i;
+                $('table tbody').append(getTemplate('tpl-box-office-item', movie));
+        }
+        $('table tbody>tr').hover(function(ev) {
+            var data = $(ev.target).closest('tr').data();
+            var movie = app.movies[data.id];
+            $('.movie-detail').html(getTemplate('tpl-movie-detail', movie));
         });
-    };
-	
-
-	
-function showMovies(response) { 
-        console.log('response', response);
-		var hitTemplate = Handlebars.compile($("#hit-template").html());
-        var movies = response.movies;
-		var rs = $("#rs");
-        rs.empty();
-		rs.html(""); 
-        for (var i = 0; i < movies.length; i++) {
-        var movie = movies[i];
-		rs.append(hitTemplate({title: movie.title, 
-									
-									poster: movie.posters.detailed,
-									year: movie.year
-									
-									
-									}));
-		
-		
-        };
-		
-		var hitTemplate2 = Handlebars.compile($("#founded-template").html());
-		var resulta = $("#resulta");
-		resulta.html("");
-		resulta.empty();
-		resulta.append(hitTemplate2({found: response.movies.length}));
-		  
-    }; 
-
-
-    
+    }
 });

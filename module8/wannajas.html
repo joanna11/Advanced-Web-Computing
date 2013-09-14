@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"  >
+	<title></title>
+
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
+	<script src="js/jquery.lightbox-0.5.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="css/jquery.lightbox-0.5.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	
+	<script type="text/javascript">
+		$(function(){
+			$('#tabs').tabs();
+			
+		});
+		
+	</script>
+	
+</head>
+<body class="navbar-new">
+	<div id="tabs" class="navbar navbar-new panel-heading">
+		<div class="container panel">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+				
+			</div>
+			<div class="collapse navbar-collapse ">
+				<ul class="nav navbar-nav ">
+					<li><a href="#search"class="black-text">Search</a></li>
+					<li><a href="#box" id="boxbtn" class="black-text">Box Office</a></li>
+					<li><a href="#theaters" id="intheabtn" class="black-text">In Theaters</a></li>
+					<li><a href="#upcoming" id="upcombtn" class="black-text">Upcoming</a></li>
+					<li><a href="#opening" id="openbtn" class="black-text">Opening</a></li>
+				</ul>
+			</div>
+		</div>
+		
+		<div id="search" class="container " >
+			<div class="row container table  panel-heading">
+				<input type="text" id="formovie" placeholder = "Search Movies here" class="col-md-4"/>
+			
+				<div id="searchmovie" class="col-md-4"></div>
+				<div id="searchresult" class="col-md-4"></div>
+				
+			</div>
+			
+				<div class="container gallery"  id="search_holder">
+					<ul class="list-inline list-unstyled ">
+					</ul>
+				</div>
+			
+		</div>	
+		
+		
+	
+		<div id="box" class="container  panel-heading gallery" >
+			<ul class=" list-unstyled list-inline"></ul>
+		</div>
+		<div id="theaters" class="container gallery" >
+			<ul class="list-inline list-unstyled ">
+				
+			</ul>
+		</div>
+		<div id="upcoming" class="container gallery" >
+			<ul class="list-inline list-unstyled "></ul>
+		</div>
+		<div id="opening" class="container gallery" >
+			<ul class="list-inline list-unstyled "></ul>
+		</div>
+		
+		
+		<div class="container panel-footer black-text">copyright</div>
+	</div>
+		
+		<script type="text/x-handlebars-template" id="search-item">
+		<div class="container panel row"
+			<li>
+				<div class=" panel-heading col-md-4" >
+					<a href="{{posters.profile}}" title="{{synopsis}}">
+						<img src="{{posters.profile}}" class='img-thumbnail panel-heading panel-primary' alt="{{title}}"/> 
+					</a>
+					<p class="container black-text panel-title">{{title}}</p>
+					<p class=" container black-text">{{ratings.critics_score}}</p>
+					<p  class=" container black-text">{{mpaa_rating}}</p>
+				</div>
+				<div class="col-md-8">
+					<p class="container  panel-warning panel-body black-text">{{synopsis}}</p>
+				</div>
+			</li>
+		</div>
+			
+		</script>
+		
+	
+		<script type="text/javascript" src="js/search.js"></script>
+		<script type="text/javascript" src="js/handlebars.js"></script>
+	
+
+</body>
+</html>
